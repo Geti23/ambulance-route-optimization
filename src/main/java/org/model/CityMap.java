@@ -68,6 +68,7 @@ public class CityMap {
     }
 
     private void computePaths() {
+        // iterate the single source Dijkstra Algorithm for every node
         for (int startNode = 0; startNode < nodeCount; startNode++) {
             Set<Integer> nodesToProcess = IntStream.range(0, nodeCount).boxed().collect(Collectors.toSet());
 
@@ -79,6 +80,8 @@ public class CityMap {
             Arrays.fill(previousNode, -1);
 
             while (!nodesToProcess.isEmpty()) {
+                // i.e. find the node that has minimum distance between the
+                // nodes that are not yet explored
                 double minDistance = nodesToProcess.stream().mapToDouble(node -> shortestDistancesFrom[node]).min()
                         .getAsDouble();
                 int nodeBeingProcessed = nodesToProcess.stream()
@@ -86,6 +89,8 @@ public class CityMap {
 
                 nodesToProcess.remove(nodeBeingProcessed);
 
+                // from this node try to reach all the adjacent and check if
+                // the overall distance from the starting node decreases
                 for (int adjacentNode : adjacentNodes(nodeBeingProcessed)) {
                     double alternativeDistance = shortestDistancesFrom[nodeBeingProcessed]
                             + adjMatrix[nodeBeingProcessed][adjacentNode];
@@ -98,6 +103,7 @@ public class CityMap {
 
             shortestDistances[startNode] = shortestDistancesFrom;
 
+            // generate all paths backtracking on previousNode
             for (int endNode = 0; endNode < nodeCount; endNode++) {
                 ArrayList<Integer> path = new ArrayList<Integer>();
                 if (Double.isFinite(shortestDistances[startNode][endNode])) {

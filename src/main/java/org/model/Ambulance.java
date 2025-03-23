@@ -7,6 +7,16 @@ public class Ambulance extends NodeContent{
     private Patient patient;
     private boolean clean;
 
+    /**
+     * Builds an {@link Ambulance} at the node passed as parameter. The provided
+     * id is used and the ambulance is set to be carrying the patient passed as
+     * parameter.
+     *
+     * @param node
+     * @param id
+     * @param patient
+     * @param clean
+     */
     Ambulance(int node, int id, Patient patient, boolean clean) {
         super(node);
         this.id = id;
@@ -46,6 +56,11 @@ public class Ambulance extends NodeContent{
                 isClean() ? "" : "*");
     }
 
+    /**
+     * Unloads the patients, resetting the state of the ambulance to free
+     *
+     * @return patient
+     */
     Patient unload() {
         if (isFree())
             throw new IllegalStateException("No patient onboard");

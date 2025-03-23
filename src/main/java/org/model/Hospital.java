@@ -6,6 +6,11 @@ public class Hospital extends NodeContent{
     private final int id;
     private final int maxSeverity;
 
+    /**Builds a new {@link Hospital} at the provided node using the id passed as parameter.
+     * @param node
+     * @param id
+     * @param maxSeverity
+     */
     Hospital(int node, int id, int maxSeverity) {
         super(node);
         this.id = id;

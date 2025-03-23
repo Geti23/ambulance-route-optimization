@@ -13,8 +13,10 @@ public class Main {
     private static long totalWaitingTime = 0;
 
     public static void main(String[] args) throws Exception{
+        // getting the file name containing the input problem graph
         String cityFileName = "test1.pddl";
 
+        // initial set up
         HungarianPlanner planner = new HungarianPlanner();
         CityMap map = CityParser.parse(cityFileName);
 
@@ -34,6 +36,7 @@ public class Main {
             System.out.println("Step: " + step);
             step++;
 
+            // if we don't have a plan make one
             if (replanningNeeded) {
                 System.out.println("Replanning...");
                 plan = planner.solve(map);
@@ -43,6 +46,7 @@ public class Main {
             System.out.print(map.represent(CityMap.Print.AMBULANCES_LOCATIONS));
             System.out.print(map.represent(CityMap.Print.PATIENT_LOCATIONS));
 
+            // print full plan
             for (Ambulance amb : plan.keySet()) {
                 System.out.println("Actions for " + amb);
                 if (!plan.get(amb).isEmpty()) {

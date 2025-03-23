@@ -16,6 +16,7 @@ public class HungarianPlanner{
 
         Map<Ambulance, List<Action>> bigplan = new HashMap<>();
 
+        // ambulances without patient
         int[] availAmbIds = map.getAmbulances().stream().filter(Ambulance::isFree).mapToInt(Ambulance::getId).toArray();
         int availAmb = availAmbIds.length;
         if (availAmb > 0) {
@@ -29,6 +30,9 @@ public class HungarianPlanner{
 
             }
 
+            // must be a square matrix:
+            // - amb x (pat+cen) if pat<=amb
+            // - (amb+padding) x pat if pat>amb
             int columnCount = numPat + centroids.length;
             int rowCount = availAmb;
             int[][] shortestDistances = new int[rowCount][columnCount];
@@ -37,6 +41,7 @@ public class HungarianPlanner{
                 Ambulance ambulance = map.getAmbulances().stream().filter(a -> a.getId() == ambId).findAny().get();
                 int ambNode = ambulance.getNode();
                 for (int pat = 0; pat < numPat; pat++) {
+                    // total distance amb->pat->hos / severity factor
                     int patId = patIds[pat];
                     Patient p = map.getPatients().stream().filter(pa -> pa.getId() == patId).findAny().get();
                     int patNode = p.getNode();
@@ -84,6 +89,7 @@ public class HungarianPlanner{
             }
         }
 
+        // Ambulances with a patient
         int[] busyAmbIds = map.getAmbulances().stream().filter(a -> !a.isFree()).mapToInt(Ambulance::getId).toArray();
 
         for (int ambId : busyAmbIds) {

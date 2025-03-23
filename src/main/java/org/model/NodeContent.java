@@ -1,6 +1,7 @@
 package org.model;
 
 public abstract class NodeContent {
+
     private int node;
 
     public NodeContent(int node) {

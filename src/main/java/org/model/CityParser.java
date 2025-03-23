@@ -6,8 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * Class that deciphers the PDDL problem file and creates
+ * the objects that represent the city, ambulances, patients...
+ */
 public class CityParser {
 
+    /* Constants */
     private static final int L_PARAM = 19;
     private static final int L_NODE = 0;
     private static final int L_X = 2;
@@ -35,15 +40,22 @@ public class CityParser {
     private static final int AT_OBJECT = 0;
     private static final int AT_LOCATION = 1;
 
+    /**
+     * Main function that parse the PDDL problem file
+     * @param cityFileName Path to the file
+     * @return CityMap object with its contents matching the input file
+     */
     public static CityMap parse(String cityFileName) {
 
         InputStream input;
         CityMap c = null;
 
         try {
+            // Open input file
             input = new FileInputStream(cityFileName);
             CityParser cp = new CityParser(input);
 
+            // Go to objects
             int l = 0;
             do {
                 cp.nextLine();
@@ -79,10 +91,12 @@ public class CityParser {
                 contents[node] = new ArrayList<>();
             }
 
+            // Go to initial state
             do {
                 cp.nextLine();
             } while (!cp.line.contains("(:init"));
 
+            // Read all initial states (until "(:goal")
             do {
                 cp.parsePredicate(adjMatrix, coordinates, demands, (ArrayList<NodeContent>[]) contents);
                 cp.nextLine();
@@ -96,6 +110,15 @@ public class CityParser {
         return c;
     }
 
+    /**
+     * Method in charge of reading line after line and calling the different
+     * types of predicates
+     *
+     * @param adjMatrix Adjacency matrix
+     * @param coord Cartesian coordinates
+     * @param demands Demands for each node
+     * @param contents Content of the nodes
+     */
     private void parsePredicate(double[][] adjMatrix, double[][] coord, double[] demands,
                                 ArrayList<NodeContent>[] contents) {
 
@@ -105,6 +128,7 @@ public class CityParser {
 
         String pred = this.nextLine();
 
+        // Fist time look for location
         do {
             if (pred.contains("LocationCoord")) {
                 createLocationCoord(pred, coord);
@@ -125,8 +149,18 @@ public class CityParser {
             pred = this.nextLine();
 
         } while (!line.equals(")"));
+        // the close of init (before the goal)
+        // no need to read the goal, it's fixed in our case
     }
 
+    /* Actions */
+
+    /**
+     * Creates an ambulance object
+     *
+     * @param pred Predicate
+     * @param ambulances Array containing all the ambulances
+     */
     private void createAmbulance(String pred, ArrayList<Ambulance> ambulances) {
 
         String params = pred.substring(A_PARAM, pred.length());
@@ -138,6 +172,15 @@ public class CityParser {
         ambulances.add(a);
     }
 
+    /**
+     * Sets the position of patients, ambulances and hospitals
+     *
+     * @param pred Predicate
+     * @param patients Array containing all the patients
+     * @param amb Array containing all the ambulances
+     * @param hosp Array containing all the hospitals
+     * @param contents Array of arrays for the content of each node
+     */
     private void createAt(String pred, ArrayList<Patient> patients, ArrayList<Ambulance> amb, ArrayList<Hospital> hosp,
                           ArrayList<NodeContent>[] contents) {
 
@@ -165,6 +208,12 @@ public class CityParser {
 
     }
 
+    /**
+     * Creates an ambulance object
+     *
+     * @param pred Predicate
+     * @param hospitals Array containing all the hospitals
+     */
     private void createHospital(String pred, ArrayList<Hospital> hospitals) {
 
         String params = pred.substring(H_PARAM, pred.length());
@@ -176,6 +225,12 @@ public class CityParser {
         hospitals.add(h);
     }
 
+    /**
+     * Assign a coordinate to a location
+     *
+     * @param pred Predicate
+     * @param coord Array of coordinates
+     */
     private void createLocationCoord(String pred, double[][] coord) {
 
         String params = pred.substring(L_PARAM, pred.length());
@@ -190,6 +245,12 @@ public class CityParser {
 
     }
 
+    /**
+     * Assigns a demand to a location
+     *
+     * @param pred Predicate
+     * @param demands Array of demands
+     */
     private void createLocationDemad(String pred, double[] demands) {
 
         String params = pred.substring(D_PARAM, pred.length());
@@ -201,6 +262,12 @@ public class CityParser {
         demands[node] = d;
     }
 
+    /**
+     * Creates a patient object
+     *
+     * @param pred Predicate
+     * @param patients Array of all patients
+     */
     private void createPatient(String pred, ArrayList<Patient> patients) {
 
         String params = pred.substring(P_PARAM, pred.length());
@@ -213,6 +280,12 @@ public class CityParser {
         patients.add(patient);
     }
 
+    /**
+     * Fills the adjacency matrix with the distance between two nodes
+     *
+     * @param pred Predicate
+     * @param adjMatrix Adjacency matrix
+     */
     private void createRoad(String pred, double[][] adjMatrix) {
 
         String params = pred.substring(R_PARAM, pred.length());

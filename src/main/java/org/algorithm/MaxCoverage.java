@@ -8,6 +8,14 @@ import java.util.Random;
 
 public class MaxCoverage {
 
+    /**
+     * Classify each node to a cluster based on the shortest distances to the
+     * centroid of the cluster
+     *
+     * @param distance - the shortest distance matrix
+     * @param bestGuess - the centroids for various clusters returns the
+     *         annotated cluster for each node
+     */
     public static int[] annotate(double[][] distance, int[] bestGuess) {
         int numNodes = distance.length;
         int numClusters = bestGuess.length;
@@ -27,6 +35,9 @@ public class MaxCoverage {
         return annotatedNodes;
     }
 
+    /**
+     * Returns the geometric mean of a given sequence of distances
+     */
     public static double calcGM(double[] dist) {
         double GM = 1;
         for (double element : dist) {
@@ -36,6 +47,16 @@ public class MaxCoverage {
         return GM;
     }
 
+    /**
+     * Finds the optimum centroids of given clusters of points
+     *
+     * @param numAmb - number of available ambulances
+     * @param distance - the shortest distance matrix
+     * @param demandNorm - the normalised demand at each node
+     * @param demand - the demand at each node
+     * @param classArr - to which cluster does each node belongs to
+     * @return the node numbers where the centroids must be placed
+     */
     public static int[] centroidFinder(int numAmb, double[][] distance, double[] demandNorm, double[] demand,
                                        int[] classArr) {
 
@@ -83,7 +104,12 @@ public class MaxCoverage {
         return optLocation;
     }
 
-
+    /**
+     * Evaluates the random initializations for clustering the nodes
+     *
+     * @param init - init nodes
+     * @param distance - the shortest distance matrix
+     */
     public static double evalInit(int[] init, double[][] distance) {
         double[] dist = new double[init.length];
         double eval = 0;
@@ -104,6 +130,13 @@ public class MaxCoverage {
         return eval;
     }
 
+    /**
+     * Finds optimal location for the ambulances to be placed
+     *
+     * @param numCentroid - the number of available ambulances
+     * @param map - the city map
+     * @return the optimal location for the ambulances
+     */
     public static int[] findMaxCoverageLocations(int numCentroid, CityMap map) {
         double[][] distance = map.getShortestDistances();
         double[] demand = map.getDemands().stream().mapToDouble(d -> d).toArray();
@@ -153,6 +186,13 @@ public class MaxCoverage {
         return optLocation;
     }
 
+    /**
+     * Calculates the confidence for a node to be an apt location for the
+     * ambulance to be placed in a cluster
+     *
+     * @param weightDist - weighted distance from other nodes
+     * @param demNode - demand at that node
+     */
     public static double penalty(double[][] weightDist, double demNode) {
         double denominator = 0;
         for (double[] element : weightDist) {
