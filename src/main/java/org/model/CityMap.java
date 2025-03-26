@@ -1,5 +1,7 @@
 package org.model;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -26,7 +28,23 @@ public class CityMap {
 
     private Map<Integer, Hospital> hospitals = new HashMap<>();
 
+    private static void dump(double[][] adjMatrix) {
+        try {
+            PrintWriter pw = new PrintWriter("cityDump.txt");
+
+            pw.println("Paste on https://graphonline.top/create_graph_by_matrix");
+            pw.println(Arrays.stream(adjMatrix).map(
+                            row -> Arrays.stream(row).mapToObj(v -> (int) Math.round(v) + "").collect(Collectors.joining(", ")))
+                    .collect(Collectors.joining("\n")));
+
+            pw.close();
+        } catch (FileNotFoundException e) {
+            // ignore
+        }
+    }
+
     public CityMap(double[][] adjMatrix, List<List<NodeContent>> contents, double[] demands) {
+        dump(adjMatrix);
 
         nodeCount = adjMatrix.length;
 
