@@ -165,6 +165,10 @@ public class CityMap {
         action.performAction(this);
     }
 
+    public int nodesCount() {
+        return nodeCount;
+    }
+
     public String represent(Print what) {
         StringBuilder sb = new StringBuilder();
 
@@ -220,4 +224,8 @@ public class CityMap {
         return (ArrayList<Integer>) shortestsPaths[from][to];
     }
 
+    public void spawn(Patient patient) {
+        contents.get(patient.getNode()).add(patient);
+        patients.put(patient.getId(), patient);
+    }
 }

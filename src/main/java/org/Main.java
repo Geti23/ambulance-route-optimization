@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         // getting the file name containing the input problem graph
-        String cityFileName = "test1.pddl";
+        String cityFileName = "test3.pddl";
 
         // debugging utilities
         new File("logs").mkdir();
@@ -34,6 +34,8 @@ public class Main {
 
         PrintWriter solutionWriter = new PrintWriter(solution);
         PrintWriter eventsWriter = new PrintWriter(easyToReadDescription);
+
+        PatientProvider patientProvider = new PatientProvider(map);
 
         System.out.println(map.represent(CityMap.Print.ADJ_MATRIX));
         System.out.println(map.represent(CityMap.Print.SHORTEST_DISTANCES_MATRIX));
@@ -102,6 +104,14 @@ public class Main {
             }
 
             totalWaitingTime += map.getPatients().stream().filter(Patient::isWaiting).count();
+
+            if (patientProvider.hasNewPatient()) {
+                Patient patient = patientProvider.getNewPatient();
+                System.out.println("Added " + patient);
+                eventsWriter.println("  Added " + patient);
+                map.spawn(patient);
+                replanningNeeded = true;
+            }
         } while (replanningNeeded || !plan.values().stream().allMatch(List::isEmpty));
 
         System.out.println("\nDone!");

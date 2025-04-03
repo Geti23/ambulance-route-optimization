@@ -235,3 +235,24 @@ the result is found to be the following:
       Total distance travelled: 54.5411552485237
       Total time patients waited: 13
 
+**Debugging utilities** 
+- Each time the application is executed the results will be saved on the logs folder. 
+The results will be archived as a detailed description in the respective .descr files. Meanwhile, the step-by-step plan
+is saved in the correspondent .plan file. Of course, these can be accessed anytime for checking and/or comparing results
+between different input graphs.
+- On top of that, in the cityDump.txt file, we save the current adjacency matrix (the nodes and relations between them),
+which can be viewed as a graph if pasted on the recommended webpage inside this file.
+
+**Dynamic updates** - The ability to add new patients in-between steps is crucial for any ambulance route optimization
+application. This added feature enables:
+- *Dynamic Response to Emergencies*: Emergencies can arise at any moment, and the ability to add new patients in 
+real-time allows the system to adapt quickly to changing situations. This ensures that ambulances can respond to 
+urgent calls without delay.
+- *Improved Resource Allocation*: By allowing new patients to be added on-the-fly, the application can optimize routes 
+based on the current demand for services. This helps in efficiently allocating resources and ensuring that ambulances 
+are dispatched to the most critical cases first.
+- *Increased Operational Efficiency*: The application can continuously recalculate routes and schedules as new patients 
+are added, leading to more efficient use of time and fuel. This can reduce response times and improve overall operational
+efficiency.
+- *Scalability*: As the demand for ambulance services grows, the ability to add patients in real-time allows the system
+to scale effectively, accommodating more patients without requiring a complete overhaul of existing processes.

@@ -1,0 +1,38 @@
+Step:0
+  move(A0 5 -> 4)
+  move(A1 4 -> 1)
+Step:1
+  move(A0 4 -> 1)
+  move(A1 1 -> 0)
+Step:2
+  pick(A0 P2 @ N1)
+  move(A1 0 -> 3)
+Step:3
+  move(A0 1 -> 0)
+  pick(A1 P1 @ N3)
+Step:4
+  drop(A0 P2 @ N0)
+  move(A1 3 -> 0)
+Step:5
+  move(A0 0 -> 1)
+  drop(A1 P1 @ N0)
+Step:6
+  move(A0 1 -> 4)
+  move(A1 0 -> 1)
+Step:7
+  move(A0 4 -> 5)
+  move(A1 1 -> 2)
+Step:8
+  pick(A0 P3 @ N5)
+  pick(A1 P0 @ N2)
+Step:9
+  move(A0 5 -> 4)
+  move(A1 2 -> 1)
+Step:10
+  drop(A0 P3 @ N4)
+  move(A1 1 -> 0)
+Step:11
+  move(A0 4 -> 1)
+  drop(A1 P0 @ N0)
+Step:12
+  move(A0 1 -> 4)
