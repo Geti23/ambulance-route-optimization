@@ -1,4 +1,4 @@
-package org.model;
+package org.algorithm.model;
 
 public class Hospital extends NodeContent{
     private static int ID = 0;

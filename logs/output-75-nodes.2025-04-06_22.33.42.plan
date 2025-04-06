@@ -1,0 +1,95 @@
+Step:0
+  move(A0 23 -> 8)
+  move(A1 66 -> 6)
+  move(A2 51 -> 9)
+Step:1
+  move(A0 8 -> 15)
+  move(A1 6 -> 21)
+  move(A2 9 -> 6)
+Step:2
+  pick(A0 P0 @ N15)
+  pick(A1 P1 @ N21)
+  move(A2 6 -> 2)
+Step:3
+  move(A0 15 -> 50)
+  move(A1 21 -> 56)
+  move(A2 2 -> 30)
+Step:4
+  move(A0 50 -> 17)
+  move(A1 56 -> 44)
+  pick(A2 P2 @ N30)
+Step:5
+  move(A0 17 -> 13)
+  move(A1 44 -> 37)
+  move(A2 30 -> 12)
+Step:6
+  move(A0 13 -> 37)
+  move(A1 37 -> 45)
+  move(A2 12 -> 64)
+Step:7
+  move(A0 37 -> 45)
+  drop(A1 P1 @ N45)
+  move(A2 64 -> 53)
+Step:8
+  drop(A0 P0 @ N45)
+  move(A1 45 -> 37)
+  move(A2 53 -> 20)
+Step:9
+  move(A0 45 -> 40)
+  move(A1 37 -> 13)
+  move(A2 20 -> 46)
+Step:10
+  move(A0 40 -> 10)
+  move(A1 13 -> 17)
+  move(A2 46 -> 47)
+Step:11
+  move(A0 10 -> 16)
+  move(A1 17 -> 50)
+  drop(A2 P2 @ N47)
+Step:12
+  move(A0 16 -> 60)
+  move(A1 50 -> 15)
+  move(A2 47 -> 46)
+Step:13
+  pick(A0 P4 @ N60)
+  move(A1 15 -> 33)
+  move(A2 46 -> 54)
+Step:14
+  move(A0 60 -> 16)
+  pick(A1 P3 @ N33)
+  move(A2 54 -> 5)
+Step:15
+  move(A0 16 -> 10)
+  move(A1 33 -> 15)
+  move(A2 5 -> 2)
+Step:16
+  move(A0 10 -> 40)
+  move(A1 15 -> 50)
+Step:17
+  move(A0 40 -> 45)
+  move(A1 50 -> 17)
+Step:18
+  drop(A0 P4 @ N45)
+  move(A1 17 -> 13)
+Step:19
+  move(A0 45 -> 40)
+  move(A1 13 -> 37)
+Step:20
+  move(A0 40 -> 10)
+  move(A1 37 -> 45)
+Step:21
+  drop(A1 P3 @ N45)
+Step:22
+  move(A0 10 -> 26)
+  move(A1 45 -> 37)
+Step:23
+  move(A0 26 -> 56)
+  move(A1 37 -> 13)
+Step:24
+  move(A0 56 -> 19)
+  move(A1 13 -> 17)
+Step:25
+  move(A0 19 -> 18)
+  move(A1 17 -> 50)
+Step:26
+  move(A1 50 -> 15)

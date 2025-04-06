@@ -1,9 +1,9 @@
-package org;
+package org.algorithm;
 
 import java.io.File;
-import org.algorithm.HungarianPlanner;
-import org.model.*;
-import org.model.CityMap.Print;
+
+import org.algorithm.model.*;
+import org.algorithm.model.CityMap.Print;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -21,6 +21,11 @@ public class Main {
         // getting the file name containing the input problem graph
         String cityFileName = "test3.pddl";
 
+        /* put true if the file is from resources folder
+        *  put false if the file is from base folder */
+        boolean isResourceFile = false;
+        String fullFilePath = isResourceFile ? "src/main/resources/generated-graphs/" + cityFileName : cityFileName;
+
         // debugging utilities
         new File("logs").mkdir();
         String now = new SimpleDateFormat(".yyyy-MM-dd_HH.mm.ss").format(new Date());
@@ -29,8 +34,8 @@ public class Main {
 
         // initial set up
         HungarianPlanner planner = new HungarianPlanner();
-        CityMap map = CityParser.parse(cityFileName);
-        Files.copy(new File(cityFileName).toPath(), new File(easyToReadDescription).toPath());
+        CityMap map = CityParser.parse(fullFilePath);
+        Files.copy(new File(fullFilePath).toPath(), new File(easyToReadDescription).toPath());
 
         PrintWriter solutionWriter = new PrintWriter(solution);
         PrintWriter eventsWriter = new PrintWriter(easyToReadDescription);
@@ -105,13 +110,14 @@ public class Main {
 
             totalWaitingTime += map.getPatients().stream().filter(Patient::isWaiting).count();
 
-            if (patientProvider.hasNewPatient()) {
+            // uncomment to use feature of adding new patients in between each step
+            /*if (patientProvider.hasNewPatient()) {
                 Patient patient = patientProvider.getNewPatient();
                 System.out.println("Added " + patient);
                 eventsWriter.println("  Added " + patient);
                 map.spawn(patient);
                 replanningNeeded = true;
-            }
+            }*/
         } while (replanningNeeded || !plan.values().stream().allMatch(List::isEmpty));
 
         System.out.println("\nDone!");

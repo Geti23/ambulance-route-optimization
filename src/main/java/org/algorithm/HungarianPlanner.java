@@ -1,6 +1,6 @@
 package org.algorithm;
 
-import org.model.*;
+import org.algorithm.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

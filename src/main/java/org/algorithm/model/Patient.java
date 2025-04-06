@@ -1,4 +1,4 @@
-package org.model;
+package org.algorithm.model;
 
 public class Patient extends NodeContent{
     private static int COUNT = 0;

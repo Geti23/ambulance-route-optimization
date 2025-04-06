@@ -1,4 +1,4 @@
-package org.model;
+package org.algorithm.model;
 
 public class ActionPick extends Action {
     private Ambulance ambulance;

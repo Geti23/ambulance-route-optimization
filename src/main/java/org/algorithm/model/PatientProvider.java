@@ -1,4 +1,4 @@
-package org.model;
+package org.algorithm.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;

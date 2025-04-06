@@ -1,4 +1,4 @@
-package org.model;
+package org.algorithm.model;
 
 import java.io.*;
 import java.util.ArrayList;

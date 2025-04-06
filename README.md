@@ -256,3 +256,32 @@ are added, leading to more efficient use of time and fuel. This can reduce respo
 efficiency.
 - *Scalability*: As the demand for ambulance services grows, the ability to add patients in real-time allows the system
 to scale effectively, accommodating more patients without requiring a complete overhaul of existing processes.
+
+**Graph generator** - In order to accelerate the testing and evaluation of the application's performance, the 'generator'
+folder with all the necessary logic has been created.
+- In the main generator class ('org/generator/Main.java') simply input the path of the json file, which includes the parameters
+needed for generating the graph (see 'input.json' for reference in the 'resources' -> 'json-inputs' folder), and execute it.
+- In the 'resources' -> 'generated-graphs' folder the generated graph will then be saved based on the output name given 
+in the input json file
+
+**Performance evaluation** - Using the graph generator we have quickly created 5 different .pddl graphs with 10, 25, 50, 
+75 and 100 nodes respectively. Inputting these graphs into the application's main method ('org/algorithm/Main.java') will 
+give us the results which we can use to make some performance evaluations and comparisons between low number of nodes, which 
+represent small cities, and big number of nodes, representing bigger cities.  
+This is how the table of results looks like:
+
+| Nodes | Total Distance Travelled | Total Time Patients Waited |
+|-------|--------------------------|----------------------------|
+|  10   | 135.786570697138         |            18              |
+|  25   | 383.601555394813         |            27              |
+|  50   | 849.434641258258         |            27              |
+|  75   | 2118.03854021827         |            35              |
+| 100   | 2756.73865586778         |            39              |
+
+These columns and their respective charts can be found in the 'Performance-testing-results.xlsx' file in root directory
+(not viewable on github, must be downloaded). This file will be constantly updated with new testing data.   
+
+From these results we see that when the number of nodes is increased, the total distance travelled also increases
+in a relatively linear pace. Meanwhile, the total time the patients waited, while it has naturally increased along with
+the number of nodes, it hasn't had an increase as steep as the total distance travelled. This means that the priority
+here is minimizing the patient waiting time, which comes to the expense of more distance travelled for the ambulances.

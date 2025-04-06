@@ -1,6 +1,6 @@
 package org.algorithm;
 
-import org.model.CityMap;
+import org.algorithm.model.CityMap;
 
 import java.util.ArrayList;
 import java.util.List;
