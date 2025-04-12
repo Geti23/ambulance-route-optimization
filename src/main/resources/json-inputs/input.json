@@ -1,16 +1,16 @@
 {
   "nodes": 100,
-  "roads": 150,
+  "roads": 120,
   "noise": 1,
-  "demand": 50,
+  "demand": 100,
 
-  "ambulances": 3,
-  "hospitals": 2,
+  "ambulances": 20,
+  "hospitals": 10,
 
   "patients": 5,
   "severity1prob": 0.2,
   "severity2prob": 0.5,
   "severity3prob": 0.3,
 
-  "output": "src/main/resources/generated-graphs/output-100-nodes.pddl"
+  "output": "src/main/resources/generated-graphs/generated-20a-5p.pddl"
 }

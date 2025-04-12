@@ -1,10 +1,7 @@
 package org.algorithm.model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Class that deciphers the PDDL problem file and creates
@@ -45,7 +42,7 @@ public class CityParser {
      * @param cityFileName Path to the file
      * @return CityMap object with its contents matching the input file
      */
-    public static CityMap parse(String cityFileName) {
+    public static CityMap parse(String cityFileName) throws IOException {
 
         InputStream input;
         CityMap c = null;
@@ -104,8 +101,19 @@ public class CityParser {
 
             c = new CityMap(adjMatrix, Arrays.asList(contents), demands);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new FileNotFoundException("Execution stopped! File not found!");
+        } catch (Exception e) {
+            throw new IOException("Execution stopped! Invalid input file provided!");
         }
+
+        if (c.getPatients().isEmpty())
+            throw new IOException("Execution stopped! There are no patients!");
+        else if (c.nodesCount() == 0)
+            throw new IOException("Execution stopped! There are no nodes!");
+        else if (c.getAmbulances().isEmpty())
+            throw new IOException("Execution stopped! There are no ambulances!");
+        else if (c.getHospitals().isEmpty())
+            throw new IOException("Execution stopped! There are no hospitals!");
 
         return c;
     }

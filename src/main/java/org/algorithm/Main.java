@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -18,12 +19,16 @@ public class Main {
     private static long totalWaitingTime = 0;
 
     public static void main(String[] args) throws Exception{
+        Scanner scanner = new Scanner(System.in);
         // getting the file name containing the input problem graph
-        String cityFileName = "test3.pddl";
+        System.out.println("Enter input file name:");
+        String cityFileName = scanner.nextLine();
+        cityFileName = cityFileName.endsWith(".pddl") ? cityFileName : cityFileName + ".pddl";
 
-        /* put true if the file is from resources folder
-        *  put false if the file is from base folder */
-        boolean isResourceFile = false;
+        /* true if the file is from resources folder/generated-graphs
+         * false if the file is from base folder */
+        System.out.println("Is this file located in the 'resources/generated-graphs' folder? (y/n):");
+        boolean isResourceFile = scanner.nextLine().equalsIgnoreCase("y");
         String fullFilePath = isResourceFile ? "src/main/resources/generated-graphs/" + cityFileName : cityFileName;
 
         // debugging utilities
