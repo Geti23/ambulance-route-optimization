@@ -285,3 +285,19 @@ From these results we see that when the number of nodes is increased, the total 
 in a relatively linear pace. Meanwhile, the total time the patients waited, while it has naturally increased along with
 the number of nodes, it hasn't had an increase as steep as the total distance travelled. This means that the priority
 here is minimizing the patient waiting time, which comes to the expense of more distance travelled for the ambulances.
+
+Testing use cases with different number of ambulances and patients got us the results that can be seen in the table below.
+
+| Ambulances | Patients | Total Distance Travelled | Total Time Patients Waited |
+|------------|----------|--------------------------|----------------------------|
+| 20         | 20       | 9811.004593468691        | 71                         |
+| 20         | 5        | 9432.354936168373        | 39                         |
+| 5          | 20       | 6658.987890601285        | 303                        |
+
+For the base case the number of ambulances is the same as the number of patients, which results in around 9811 
+distance travelled and 71 total time the patients waited. When we have more ambulances the distance travelled
+drops down a bit to 9432, meanwhile the total time drops significantly to 39. And naturally when the number of patients 
+overwhelm the number of ambulances then the total time patients waited increases by a lot, to be more precise 303.
+Surprisingly the total distance travelled has dropped quite a bit to 6658. This can be explained that there are
+no extra ambulances at random nodes. When these extra ambulances are sent to a hospital node, they increase the total
+distance travelled, even though they were not carrying patients.
